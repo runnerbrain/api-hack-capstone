@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .row{
     max-width: 1000px;
     padding-left: 20px;

@@ -55,9 +55,13 @@ function displayRecipes(recipe, random) {
         $('.recipes-list').empty();
         $('.recipes-list').append(`
             <li>
-            <h3>${recipe.recipes[0].title}</h3> <button class="button random">Next</button>                
+            <h3>${recipe.recipes[0].title}</h3> 
+            <button class="button random">Next</button>                
             <img class="thumb-nail" src=${recipe.recipes[0].image} />
-            <button class="button details">Details</button>
+            <a href="" id="${recipe.recipes[0].id}" class="recipe_details_link">Details</a>
+            <ul class="recipe_ingredients" id="recipe_ingredients_${recipe.recipes[0].id}">
+                </ul>
+                <p class="recipe_instructions" id="recipe_instructions_${recipe.recipes[0].id}"></p>
             </li>`);
         return;
     }
@@ -97,13 +101,13 @@ function displayDetails(details) {
 }
 
 function displayIngredientSubstitute(ingredient) {
-    
+
     if (ingredient) {
-        const ingredientsList = ingredient.substitutes.map( (element)=> {
+        const ingredientsList = ingredient.substitutes.map((element) => {
             return `<li>${element}</li>`
         })
-    console.log(ingredientsList.join(''));
-    alert(ingredientsList.join(''));
+        console.log(ingredientsList.join(''));
+        alert(ingredientsList.join(''));
     }
 }
 
