@@ -114,3 +114,8 @@ a:link{
 .details_area{
     margin-left: 30px;
 }
+
+.recipe-item{
+    border: 1px solid grey;
+    margin-bottom: 5px;
+}

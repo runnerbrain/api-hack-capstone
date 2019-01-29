@@ -56,7 +56,7 @@ function displayRecipes(recipe, random) {
         $('.recipes-list').append(`
             <li>
             <h3>${recipe.recipes[0].title}</h3> 
-            <button class="button random">Next</button>                
+            <button class="button random"><i class="material-icons">navigate_next</i></button>                
             <img class="thumb-nail" src=${recipe.recipes[0].image} />
             <a href="" id="${recipe.recipes[0].id}" class="recipe_details_link">Details</a>
             <ul class="recipe_ingredients" id="recipe_ingredients_${recipe.recipes[0].id}">
@@ -71,15 +71,15 @@ function displayRecipes(recipe, random) {
     for (let i = 0; i < recipe.results.length; i++) {
         if (recipe.results[i].image) {
             $('.recipes-list').append(`
-            <li>
+            <li class="recipe-item">
                 <h3>${recipe.results[i].title}</h3>
                 <img src=${imag_url_part}${recipe.results[i].image} />
-                <a href="" id="${recipe.results[i].id}" class="recipe_details_link">Details</a>
+                <a href="" id="${recipe.results[i].id}" class="recipe_details_link"><i class="material-icons">unfold_more</i></a>
                 <div class="details_area" id="details_area_${recipe.results[i].id}">
                     <ul class="recipe_ingredients" id="recipe_ingredients_${recipe.results[i].id}">
                     </ul>
                     <p class="recipe_instructions" id="recipe_instructions_${recipe.results[i].id}"></p>
-                    <p><a href="" class="details_hide" id="${recipe.results[i].id}">hide</a></p>
+                    <p><a href="" class="details_hide" id="${recipe.results[i].id}"><i class="material-icons">expand_less</i></a></p>
                 </div>
             </li>
             `);
