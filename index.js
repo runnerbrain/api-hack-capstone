@@ -55,12 +55,11 @@ function displayRecipes(recipe, random) {
         $('.recipes-list').empty();
         $('.recipes-list').append(`
             <li>
-            <h3>${recipe.recipes[0].title}</h3> 
-            <button class="button random"><i class="material-icons">navigate_next</i></button>                
-            <img class="thumb-nail" src=${recipe.recipes[0].image} />
-            <a href="" id="${recipe.recipes[0].id}" class="recipe_details_link">Details</a>
-            <ul class="recipe_ingredients" id="recipe_ingredients_${recipe.recipes[0].id}">
-                </ul>
+                <h3>${recipe.recipes[0].title}</h3> 
+                <button class="button random"><i class="material-icons">navigate_next</i></button>                
+                <img class="thumb-nail" src=${recipe.recipes[0].image} />
+                <a href="" id="${recipe.recipes[0].id}" class="recipe_details_link">Details</a>
+                <ul class="recipe_ingredients" id="recipe_ingredients_${recipe.recipes[0].id}"></ul>
                 <p class="recipe_instructions" id="recipe_instructions_${recipe.recipes[0].id}"></p>
             </li>`);
         return;
@@ -72,14 +71,17 @@ function displayRecipes(recipe, random) {
         if (recipe.results[i].image) {
             $('.recipes-list').append(`
             <li class="recipe-item">
-                <h3>${recipe.results[i].title}</h3>
-                <img src=${imag_url_part}${recipe.results[i].image} />
-                <a href="" id="${recipe.results[i].id}" class="recipe_details_link"><i class="material-icons">unfold_more</i></a>
-                <div class="details_area" id="details_area_${recipe.results[i].id}">
-                    <ul class="recipe_ingredients" id="recipe_ingredients_${recipe.results[i].id}">
-                    </ul>
-                    <p class="recipe_instructions" id="recipe_instructions_${recipe.results[i].id}"></p>
-                    <p><a href="" class="details_hide" id="${recipe.results[i].id}"><i class="material-icons">expand_less</i></a></p>
+                <div class="recipe-header">
+                    <h3 class="recipe-title">${recipe.results[i].title}</h3>
+                    <img class="recipe-image" src=${imag_url_part}${recipe.results[i].image} />
+                </div>
+                <div class="recipe-content">
+                    <a href="" id="${recipe.results[i].id}" class="recipe_details_link"><i class="material-icons">unfold_more</i></a>
+                    <div class="details_area" id="details_area_${recipe.results[i].id}">
+                        <ul class="recipe_ingredients" id="recipe_ingredients_${recipe.results[i].id}"></ul>
+                        <p class="recipe_instructions" id="recipe_instructions_${recipe.results[i].id}"></p>
+                        <p><a href=""  class="details_hide" id="${recipe.results[i].id}"><i class="material-icons">expand_less</i></a></p>
+                    </div>
                 </div>
             </li>
             `);
@@ -92,7 +94,7 @@ function displayDetails(details) {
     let recipeIngredientsId = `#recipe_ingredients_${details.id}`;
     details.extendedIngredients.forEach(element => {
         $(recipeIngredientsId).append(`
-            <li>${element.name}, (${element.amount} ${element.unit}), <a href="" id="${element.id}" class="ingredient">=></a></li>
+            <li>${element.name}, (${element.amount} ${element.unit}), <a href="" id="${element.id}" class="ingredient"><i class="material-icons">loop</i></a></li>
         `)
     });
     let recipeInstructionsId = `#recipe_instructions_${details.id}`;
@@ -110,8 +112,6 @@ function displayIngredientSubstitute(ingredient) {
         alert(ingredientsList.join(''));
     }
 }
-
-
 
 function getOptions() {
     const options = {
