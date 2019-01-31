@@ -5,6 +5,19 @@ const apiKey = 'a82777318dmsh18dd11e882135a1p1ddf7bjsn2e58b75483aa';
 let my_offset = 0;
 const max_num = 10;
 
+$( "#dialog" ).dialog({
+    title: "Ingredients substitute",
+    autoOpen: false,
+    show: {
+      effect: "blind",
+      duration: 1000
+    },
+    hide: {
+      effect: "fade",
+      duration: 1000
+    }
+  });
+
 function watchRecipesForm() {
 
     $('form').submit(function (event) {
@@ -43,11 +56,13 @@ function watchRecipesForm() {
         $(`#details_area_${recipeId}`).toggle();
     });
 
-    $('.recipes-list').on('click', '.ingredient', function (event) {
+    $('.recipes-list').on('click','.ingredient',function(event) {
+        $("#dialog").empty();
         event.preventDefault();
         let ingredientId = $(this).attr('id');
         fetchIngredientSubstitute(ingredientId);
-    })
+        $( "#dialog" ).dialog( "open" );
+      });
 }
 
 function displayRecipes(recipe, random) {
@@ -57,7 +72,9 @@ function displayRecipes(recipe, random) {
             <li class="recipe-item">
                 <p class="navigate"><button class="button random">Next</button></p>
                 <div class="recipe-header">
+                <div class="recipe-info">
                     <h3 class="recipe-title">${recipe.recipes[0].title}</h3>
+                </div>
                     <img class="recipe-image" src=${recipe.recipes[0].image} />
                 </div>                
                 
@@ -78,7 +95,6 @@ function displayRecipes(recipe, random) {
                 <div class="recipe-header">
                     <div class="recipe-info">
                         <h3 class="recipe-title">${recipe.results[i].title}</h3>
-                        <h5></h5>
                     </div>
                     <img class="recipe-image" src=${imag_url_part}${recipe.results[i].image} />
                 </div>
@@ -101,7 +117,7 @@ function displayDetails(details) {
     let recipeIngredientsId = `#recipe_ingredients_${details.id}`;
     details.extendedIngredients.forEach(element => {
         $(recipeIngredientsId).append(`
-            <li>${element.name}, (${element.amount} ${element.unit}) <a href="" id="${element.id}" class="ingredient"><i class="material-icons">loop</i></a></li>
+            <li>${element.name}, (${element.amount} ${element.unit}) <a href="" id="${element.id}" class="ingredient"><span class="ui-icon ui-icon-arrowrefresh-1-s"></span></a></li>
         `)
     });
     let recipeInstructionsId = `#recipe_instructions_${details.id}`;
@@ -115,8 +131,8 @@ function displayIngredientSubstitute(ingredient) {
         const ingredientsList = ingredient.substitutes.map((element) => {
             return `<li>${element}</li>`
         })
-        console.log(ingredientsList.join(''));
-        alert(ingredientsList.join(''));
+        console.log(ingredientsList.join('')); 
+        $('#dialog').append(ingredientsList.join(''));
     }
 }
 
@@ -131,7 +147,6 @@ function getOptions() {
 
 function getRecipes(qry, max_num, my_offset) {
     console.log(`Inside getRecipes ${qry}`);
-    // $('.recipes').removeClass('hidden');
     const options = getOptions();
     fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?query=${qry}&number=${max_num}&offset=${my_offset}`, options)
         .then(response => response.json())

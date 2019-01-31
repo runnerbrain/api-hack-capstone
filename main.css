@@ -24,6 +24,7 @@ form input[type=text] {
     background: #f1f1f1;
   }
 
+
   form button {
     float: left;
     width: 20%;
@@ -37,7 +38,47 @@ form input[type=text] {
     border-bottom-right-radius: 3px;
     cursor: pointer;
   }
-  
+
+  @media screen and (max-width: 600px){
+
+    *{
+        font-size: 14px;
+    }
+
+    form input[type=text] {
+        padding: 5px;
+        font-size: 16px;
+        border: 0.5px solid grey;
+        float: left;
+        width: 80%;
+        border-top-left-radius: 2px;
+        border-bottom-left-radius: 2px;
+        background: #f1f1f1;
+      }
+
+      form button {
+        float: left;
+        width: 20%;
+        padding: 5px;
+        background: rgb(47, 99, 141);
+        color: white;
+        font-size: 16px;
+        border: 1px solid grey;
+        border-left: none; /* Prevent double borders */
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+        cursor: pointer;
+      }
+
+      h2{
+          font-size: 14px;
+      }
+
+      h3{
+          font-size: 12px;
+      }
+  }
+
   form button:hover {
     background: #0b7dda;
   }
@@ -151,6 +192,16 @@ a:link{
     height: 225px;
     object-fit: contain;
 }
+
+@media screen and (max-width: 600px) {
+    .recipe-image {
+        display: flex;
+        flex-grow: 2;
+        max-width: 150px;
+        height: 126px;
+        object-fit: contain;
+    }
+  }
 
 i{
     display: inline-flex;
