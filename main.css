@@ -2,6 +2,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-sizing: border-box;
     margin: 0;
+    background: #374859;
 }
 
 .banner {
@@ -27,7 +28,7 @@ form input[type=text] {
     float: left;
     width: 20%;
     padding: 10px;
-    background: #2196F3;
+    background: rgb(47, 99, 141);
     color: white;
     font-size: 24px;
     border: 1px solid grey;
@@ -134,9 +135,11 @@ a:link{
     border-radius: 3px;
     margin-bottom: 5px;
     padding : 20px;
+    background: slategray;
 }
 
-.recipe-title{
+
+.recipe-info{
     display: flex;
     flex-grow: 8;
 }
@@ -153,4 +156,11 @@ i{
     display: inline-flex;
     vertical-align: middle;
     justify-content: center;
+    color: white;
+}
+
+.navigate{
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }

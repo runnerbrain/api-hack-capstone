@@ -19,7 +19,7 @@ function watchRecipesForm() {
         fetchAndDisplayRandomRecipe();
     });
 
-    $('.recipes-list').on('click', '.next_set', function (event) {
+    $('#load-more').on('click', '.next_set', function (event) {
         console.log('clicked');
         event.preventDefault();
         my_offset = my_offset + 10;
@@ -54,10 +54,13 @@ function displayRecipes(recipe, random) {
     if (random) {
         $('.recipes-list').empty();
         $('.recipes-list').append(`
-            <li>
-                <h3>${recipe.recipes[0].title}</h3> 
-                <button class="button random"><i class="material-icons">navigate_next</i></button>                
-                <img class="thumb-nail" src=${recipe.recipes[0].image} />
+            <li class="recipe-item">
+                <p class="navigate"><button class="button random">Next</button></p>
+                <div class="recipe-header">
+                    <h3 class="recipe-title">${recipe.recipes[0].title}</h3>
+                    <img class="recipe-image" src=${recipe.recipes[0].image} />
+                </div>                
+                
                 <a href="" id="${recipe.recipes[0].id}" class="recipe_details_link">Details</a>
                 <ul class="recipe_ingredients" id="recipe_ingredients_${recipe.recipes[0].id}"></ul>
                 <p class="recipe_instructions" id="recipe_instructions_${recipe.recipes[0].id}"></p>
@@ -66,13 +69,17 @@ function displayRecipes(recipe, random) {
     }
     $('.display-area-header').html('Recipes Suggestions:')
     $('.recipes-list').empty();
+    $('#load-more').empty();
     const imag_url_part = 'https://spoonacular.com/recipeImages/';
     for (let i = 0; i < recipe.results.length; i++) {
         if (recipe.results[i].image) {
             $('.recipes-list').append(`
             <li class="recipe-item">
                 <div class="recipe-header">
-                    <h3 class="recipe-title">${recipe.results[i].title}</h3>
+                    <div class="recipe-info">
+                        <h3 class="recipe-title">${recipe.results[i].title}</h3>
+                        <h5></h5>
+                    </div>
                     <img class="recipe-image" src=${imag_url_part}${recipe.results[i].image} />
                 </div>
                 <div class="recipe-content">
@@ -87,14 +94,14 @@ function displayRecipes(recipe, random) {
             `);
         }
     }
-    $('.recipes-list').append(`<button class="button next_set">Next</button>`);
+    $('#load-more').append(`<button class="button next_set">Load more</button>`);
 }
 
 function displayDetails(details) {
     let recipeIngredientsId = `#recipe_ingredients_${details.id}`;
     details.extendedIngredients.forEach(element => {
         $(recipeIngredientsId).append(`
-            <li>${element.name}, (${element.amount} ${element.unit}), <a href="" id="${element.id}" class="ingredient"><i class="material-icons">loop</i></a></li>
+            <li>${element.name}, (${element.amount} ${element.unit}) <a href="" id="${element.id}" class="ingredient"><i class="material-icons">loop</i></a></li>
         `)
     });
     let recipeInstructionsId = `#recipe_instructions_${details.id}`;
