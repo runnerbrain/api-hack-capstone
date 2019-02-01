@@ -69,28 +69,34 @@ function displayRecipes(recipe, random) {
     if (random) {
         $('.recipes-list').empty();
         $('.recipes-list').append(`
+            <h1 style="text-align: center">Random Recipe</h1>
             <li class="recipe-item">
-                <p class="navigate"><button class="button random">Next</button></p>
+                <p class="navigate"><button class="button random"><span class="ui-icon ui-icon-arrowthick-1-e"></span></button></p>
                 <div class="recipe-header">
-                <div class="recipe-info">
-                    <h3 class="recipe-title">${recipe.recipes[0].title}</h3>
-                </div>
+                    <div class="recipe-info">
+                        <h3 class="recipe-title">${recipe.recipes[0].title}</h3>
+                    </div>
                     <img class="recipe-image" src=${recipe.recipes[0].image} />
-                </div>                
-                
-                <a href="" id="${recipe.recipes[0].id}" class="recipe_details_link">Details</a>
-                <ul class="recipe_ingredients" id="recipe_ingredients_${recipe.recipes[0].id}"></ul>
-                <p class="recipe_instructions" id="recipe_instructions_${recipe.recipes[0].id}"></p>
+                </div>        
+                <div class="recipe-details-container">        
+                    <a href="" id="${recipe.recipes[0].id}" class="recipe_details_link"><i class="material-icons">unfold_more</i></a>
+                    <div class="details_area" id="details_area_${recipe.recipes[0].id}">
+                        <ul class="recipe_ingredients" id="recipe_ingredients_${recipe.recipes[0].id}"></ul>
+                        <p class="recipe_instructions" id="recipe_instructions_${recipe.recipes[0].id}"></p>
+                        <p><a href=""  class="details_hide" id="${recipe.recipes[0].id}"><i class="material-icons">expand_less</i></a></p>
+                    </div>
+                </div>
             </li>`);
         return;
     }
-    $('.display-area-header').html('Recipes Suggestions:')
+    $('.display-area-header').html(`<h1>Recipe Suggestions</h1>`);
     $('.recipes-list').empty();
     $('#load-more').empty();
     const imag_url_part = 'https://spoonacular.com/recipeImages/';
     for (let i = 0; i < recipe.results.length; i++) {
         if (recipe.results[i].image) {
             $('.recipes-list').append(`
+            
             <li class="recipe-item">
                 <div class="recipe-header">
                     <div class="recipe-info">
@@ -98,7 +104,7 @@ function displayRecipes(recipe, random) {
                     </div>
                     <img class="recipe-image" src=${imag_url_part}${recipe.results[i].image} />
                 </div>
-                <div class="recipe-content">
+                <div class="recipe-details-container">
                     <a href="" id="${recipe.results[i].id}" class="recipe_details_link"><i class="material-icons">unfold_more</i></a>
                     <div class="details_area" id="details_area_${recipe.results[i].id}">
                         <ul class="recipe_ingredients" id="recipe_ingredients_${recipe.results[i].id}"></ul>
