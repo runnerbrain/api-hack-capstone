@@ -5,18 +5,19 @@ const apiKey = 'a82777318dmsh18dd11e882135a1p1ddf7bjsn2e58b75483aa';
 let my_offset = 0;
 const max_num = 10;
 
-$( "#dialog" ).dialog({
+$("#dialog").dialog({
     title: "Ingredients substitute",
     autoOpen: false,
+    dialogClass: 'ingredient-dialog',
     show: {
-      effect: "blind",
-      duration: 1000
+        effect: "blind",
+        duration: 1000
     },
     hide: {
-      effect: "fade",
-      duration: 1000
+        effect: "fade",
+        duration: 1000
     }
-  });
+});
 
 function watchRecipesForm() {
 
@@ -56,22 +57,28 @@ function watchRecipesForm() {
         $(`#details_area_${recipeId}`).toggle();
     });
 
-    $('.recipes-list').on('click','.ingredient',function(event) {
+    $('.recipes-list').on('click', '.ingredient', function (event) {
         $("#dialog").empty();
         event.preventDefault();
         let ingredientId = $(this).attr('id');
         fetchIngredientSubstitute(ingredientId);
-        $( "#dialog" ).dialog( "open" );
-      });
+        $("#dialog").dialog("open");
+    });
 }
 
 function displayRecipes(recipe, random) {
+    if(recipe.totalResults === 0){
+        $('.display-area-header').html(`<h1>Recipe Suggestions</h1>`);
+        $('.recipes-list').empty();
+        $('.recipes-list').append(`<p>No results found !</p>`);
+        return;
+    }
     if (random) {
         $('.recipes-list').empty();
         $('.recipes-list').append(`
             <h1 style="text-align: center">Random Recipe</h1>
             <li class="recipe-item">
-                <p class="navigate"><button class="button random"><span class="ui-icon ui-icon-arrowthick-1-e"></span></button></p>
+                <p class="navigate"><button title="Next random recipe" class="button random"><span class="ui-icon ui-icon-arrowthick-1-e"></span></button></p>
                 <div class="recipe-header">
                     <div class="recipe-info">
                         <h3 class="recipe-title">${recipe.recipes[0].title}</h3>
@@ -127,18 +134,25 @@ function displayDetails(details) {
         `)
     });
     let recipeInstructionsId = `#recipe_instructions_${details.id}`;
-    $(recipeInstructionsId).append(`${details.instructions}`);
+        if(details.instructions != null)
+            $(recipeInstructionsId).append(`${details.instructions}`);
+    else
+        $(recipeInstructionsId).append(`<p>No Instructions provided...</p>`);
 
 }
 
 function displayIngredientSubstitute(ingredient) {
 
-    if (ingredient) {
+    if (ingredient.status != 'failure') {
         const ingredientsList = ingredient.substitutes.map((element) => {
             return `<li>${element}</li>`
         })
-        console.log(ingredientsList.join('')); 
+        //console.log(ingredientsList.join(''));
         $('#dialog').append(ingredientsList.join(''));
+    }
+    else{
+        $('#dialog').append(`No substitute found for this ingredient :( `);
+        setTimeout(function(){$('#dialog').dialog('close')},2000);
     }
 }
 

@@ -13,6 +13,17 @@ body {
 }
 
 
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
 form input[type=text] {
     padding: 10px;
     font-size: 24px;
@@ -145,13 +156,6 @@ ul {
     justify-content: center;
 }
 
-/* .recipe_instructions{
-    display: none;
-}
-
-.recipe_ingredients{
-    display: none;
-} */
 
 a:link{
     text-decoration: none;
@@ -211,4 +215,12 @@ i{
     display: flex;
     justify-content: center;
     width: 100%;
+}
+
+.ui-dialog.ingredient-dialog{
+    background: #374859;
+}
+
+.ui-dialog-titlebar{
+    background : #374859;
 }
