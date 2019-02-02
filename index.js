@@ -86,7 +86,7 @@ function displayRecipes(recipe, random) {
                     <img class="recipe-image" src=${recipe.recipes[0].image} />
                 </div>        
                 <div class="recipe-details-container">        
-                    <a href="" id="${recipe.recipes[0].id}" class="recipe_details_link"><i class="material-icons">unfold_more</i></a>
+                    <a href="" title="Show details" id="${recipe.recipes[0].id}" class="recipe_details_link"><i class="material-icons">unfold_more</i></a>
                     <div class="details_area" id="details_area_${recipe.recipes[0].id}">
                         <ul class="recipe_ingredients" id="recipe_ingredients_${recipe.recipes[0].id}"></ul>
                         <p class="recipe_instructions" id="recipe_instructions_${recipe.recipes[0].id}"></p>
@@ -112,7 +112,7 @@ function displayRecipes(recipe, random) {
                     <img class="recipe-image" src=${imag_url_part}${recipe.results[i].image} />
                 </div>
                 <div class="recipe-details-container">
-                    <a href="" id="${recipe.results[i].id}" class="recipe_details_link"><i class="material-icons">unfold_more</i></a>
+                    <a href="" title="Show details" id="${recipe.results[i].id}" class="recipe_details_link"><i class="material-icons">unfold_more</i></a>
                     <div class="details_area" id="details_area_${recipe.results[i].id}">
                         <ul class="recipe_ingredients" id="recipe_ingredients_${recipe.results[i].id}"></ul>
                         <p class="recipe_instructions" id="recipe_instructions_${recipe.results[i].id}"></p>

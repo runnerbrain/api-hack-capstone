@@ -3,10 +3,14 @@ body {
     box-sizing: border-box;
     margin: 0;
     background: #374859;
+    color: rgb(57, 58, 56);
+}
+
+h1,h2{
+    color: grey;
 }
 
 .banner {
-    color: grey;
     letter-spacing: 3px;
     word-spacing: 5px;
     text-align: center;
@@ -163,8 +167,10 @@ a:link{
 
 .recipe-header{
     display: flex;
-     flex-direction: row;
+    flex-direction: row; 
 }
+
+
 
 .recipe-details-container{
     padding: 10px;
@@ -218,9 +224,5 @@ i{
 }
 
 .ui-dialog.ingredient-dialog{
-    background: #374859;
-}
-
-.ui-dialog-titlebar{
-    background : #374859;
+    background: #5c6f81;
 }

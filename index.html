@@ -16,8 +16,8 @@
 </head>
 
 <body>
-    <header class="banner">
-        Recipes
+    <header role="heading" class="banner">
+        <div class="row"><h1>Recipe Finder</h1></div> 
     </header>
 
     <main>
@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-12">
                         <label for="recipes_q" class="visuallyhidden">Search term</label>
-                        <input type="text" name="recipes_q" id="recipes_q" placeholder="search..." required />
+                        <input type="text" name="recipes_q" id="recipes_q" title="Enter an ingredient or a recipe name" placeholder="search..." required />
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
