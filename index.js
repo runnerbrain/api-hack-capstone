@@ -34,7 +34,6 @@ function watchRecipesForm() {
     });
 
     $('#load-more').on('click', '.next_set', function (event) {
-        console.log('clicked');
         event.preventDefault();
         my_offset = my_offset + 10;
         let q = $('#recipes_q').val();
@@ -44,7 +43,6 @@ function watchRecipesForm() {
     $('.recipes-list').on('click', '.recipe_details_link', function (event) {
         event.preventDefault();
         let recipeId = $(this).attr('id');
-        console.log(`id is: ${$(this).attr('id')}`);
         $(`#details_area_${recipeId}`).toggle();
         $(`#recipe_ingredients_${recipeId}`).empty();
         $(`#recipe_instructions_${recipeId}`).empty();
@@ -147,7 +145,6 @@ function displayIngredientSubstitute(ingredient) {
         const ingredientsList = ingredient.substitutes.map((element) => {
             return `<li>${element}</li>`
         })
-        //console.log(ingredientsList.join(''));
         $('#dialog').append(ingredientsList.join(''));
     }
     else{
@@ -166,7 +163,6 @@ function getOptions() {
 }
 
 function getRecipes(qry, max_num, my_offset) {
-    console.log(`Inside getRecipes ${qry}`);
     const options = getOptions();
     fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?query=${qry}&number=${max_num}&offset=${my_offset}`, options)
         .then(response => response.json())
