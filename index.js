@@ -36,7 +36,7 @@ $( "#dialog" ).dialog({
 
 function createForm(){
     $('.landing-page').empty();
-    $('.recipes-search').append(`
+    $('.recipes-search').append(`    
     <form class="w3-center w3-animate-left" action="">
                 <div class="row">
                     <div class="col-12">
@@ -134,8 +134,9 @@ function displayRecipes(recipe, random) {
             
             <li class="recipe-item">
                 <div class="recipe-header">
-                    <div class="recipe-info">
+                    <div class="recipe-info" id="recipe_info_${recipe.results[i].id}">
                         <h3 class="recipe-title">${recipe.results[i].title}</h3>
+                        <div class="recipe-nuggets" id="recipe_nuggets_${recipe.results[i].id}"></div>
                     </div>
                     <img class="recipe-image" src=${imag_url_part}${recipe.results[i].image} />
                 </div>
@@ -160,7 +161,7 @@ function displayDetails(details) {
     let recipeIngredientsId = `#recipe_ingredients_${details.id}`;
     details.extendedIngredients.forEach(element => {
         $(recipeIngredientsId).append(`
-            <li>${element.name}, (${element.amount} ${element.unit}) <a href="" id="${element.id}" class="ingredient"><span class="ui-icon ui-icon-arrowrefresh-1-s white"></span></a></li>
+            <li>${element.name}, (${element.amount} ${element.unit}) <a href="" id="${element.id}" class="ingredient"><i class="material-icons tiny">loop</i></a></li>
         `)
     });
     let recipeInstructionsId = `#recipe_instructions_${details.id}`;
@@ -169,7 +170,25 @@ function displayDetails(details) {
 }
 
 function displayHelpfulInfo(nuggets){
+    let recipeInfoId = `#recipe_info_${nuggets.id}`;
+    let recipeNuggetsId = `#recipe_nuggets_${nuggets.id}`;
+    let recipeSource = nuggets.sourceName;
+    let recipeVegan = nuggets.vegan;
+    let recipeVegetarian = nuggets.recipeVegetarian
+    if(recipeVegan){
+        $(recipeNuggetsId).append(`<span>Vegan <i class="material-icons">check</i></span>`)
+    }
+    else{
+        $(recipeNuggetsId).append(`<span>Vegan <i class="material-icons tiny">not_interested</i></span>`)
+    }
+    if(recipeVegetarian){
+        $(recipeNuggetsId).append(`<span>Vegetarian <i class="material-icons">check</i></span>`)
+    }
+    else{
+        $(recipeNuggetsId).append(`<span>Vegetarian <i class="material-icons tiny">not_interested</i></span>`)
+    }
 
+    $(recipeInfoId).append(`<p>Source: ${recipeSource}</p>`);
 }
 
 function displayIngredientSubstitute(ingredient) {
