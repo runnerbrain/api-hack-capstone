@@ -18,6 +18,39 @@ $( "#dialog" ).dialog({
     }
   });
 
+  function recipeFinderLandingPage() {
+    setTimeout(function(){
+        $('.landing-page').html(`
+            <img class="centered-image w3-center w3-animate-right" src="whatToCook.png" />
+            <p class="w3-center w3-animate-right">Get quick ideas for recipes & ingredients to cook a delicious meal and stay Inspired.</p>
+            <button class="button button-start w3-center w3-animate-left">Get Started</button>`);
+            $('.button-start').on('click', function (event) {
+            event.preventDefault();
+            handleForm();
+            $('.start').empty();
+            console.log('start');
+        })
+    },300);
+    
+}
+
+function createForm(){
+    $('.landing-page').empty();
+    $('.recipes-search').append(`
+    <form class="w3-center w3-animate-left" action="">
+                <div class="row">
+                    <div class="col-12">
+                    <label for="recipes_q" class="visuallyhidden">Search term</label>
+                        <input type="text" name="recipes_q" id="recipes_q" placeholder="search..." required />
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+                <div class="row">     
+                </div>
+            </form>
+            `);
+}
+
 function watchRecipesForm() {
 
     $('form').submit(function (event) {
@@ -38,6 +71,7 @@ function watchRecipesForm() {
         my_offset = my_offset + 10;
         let q = $('#recipes_q').val();
         getRecipes(q, max_num, my_offset);
+        $("html, body").animate({ scrollTop: 0 }, "slow");
     })
 
     $('.recipes-list').on('click', '.recipe_details_link', function (event) {
@@ -65,11 +99,12 @@ function watchRecipesForm() {
       });
 }
 
+
 function displayRecipes(recipe, random) {
     if (random) {
         $('.recipes-list').empty();
         $('.recipes-list').append(`
-            <h1 style="text-align: center">Random Recipe</h1>
+            <h1>Random Recipe</h1>
             <li class="recipe-item">
                 <p class="navigate"><button class="button random"><span class="ui-icon ui-icon-arrowthick-1-e"></span></button></p>
                 <div class="recipe-header">
@@ -114,20 +149,26 @@ function displayRecipes(recipe, random) {
                 </div>
             </li>
             `);
+            fetchRecipeHelpfulInfo(recipe.results[i].id);
         }
     }
     $('#load-more').append(`<button class="button next_set">Load more</button>`);
 }
 
+
 function displayDetails(details) {
     let recipeIngredientsId = `#recipe_ingredients_${details.id}`;
     details.extendedIngredients.forEach(element => {
         $(recipeIngredientsId).append(`
-            <li>${element.name}, (${element.amount} ${element.unit}) <a href="" id="${element.id}" class="ingredient"><span class="ui-icon ui-icon-arrowrefresh-1-s"></span></a></li>
+            <li>${element.name}, (${element.amount} ${element.unit}) <a href="" id="${element.id}" class="ingredient"><span class="ui-icon ui-icon-arrowrefresh-1-s white"></span></a></li>
         `)
     });
     let recipeInstructionsId = `#recipe_instructions_${details.id}`;
     $(recipeInstructionsId).append(`${details.instructions}`);
+
+}
+
+function displayHelpfulInfo(nuggets){
 
 }
 
@@ -181,6 +222,14 @@ function fetchDetails(recipeId) {
         .then(responseJson => displayDetails(responseJson));
 }
 
+function fetchRecipeHelpfulInfo(recipeId){
+    const options = getOptions();
+    const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeId}/information`;
+    fetch(url, options)
+    .then(response => response.json())
+    .then(responseJson => displayHelpfulInfo(responseJson));
+}
+
 function fetchIngredientSubstitute(ingredientId) {
     const options = getOptions();
     const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/${ingredientId}/substitutes`;
@@ -191,7 +240,11 @@ function fetchIngredientSubstitute(ingredientId) {
         })
 }
 
-$(function () {
+function handleForm(){
+    createForm();
     fetchAndDisplayRandomRecipe();
     watchRecipesForm();
-});
+}
+
+
+$(recipeFinderLandingPage);
