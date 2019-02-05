@@ -1,59 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="float-grid.css">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Caveat:700|Rock+Salt" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <title>Recipe Finder</title>
 </head>
+<div>
 
-<body>
-    <header role="heading" class="banner">
-        <div class="row"><h1>Recipe Finder</h1></div> 
-    </header>
+    <body>        
+        <main>
+            <section role="region" class="landing-page">
+            </section>
 
-    <main>
-        <section role="region">
-            <form action="">
+            <section role="region" class="recipes-search">
+                <!-- <form action="">
                 <div class="row">
                     <div class="col-12">
-                        <label for="recipes_q" class="visuallyhidden">Search term</label>
-                        <input type="text" name="recipes_q" id="recipes_q" title="Enter an ingredient or a recipe name" placeholder="search..." required />
+                        <input type="text" class="visuallyhidden" name="recipes_q" id="recipes_q" placeholder="search..." required />
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
                 <div class="row">
                     
                 </div>
-            </form>
-        </section>
+            </form> -->
+            </section>
 
-        <section role="region">
-            <div class="row recipes">
-                <div class="col-12">
-                    <h2 class="display-area-header"></h2>
-                    <ul class="recipes-list"></ul>
-                    <p class="navigate" id="load-more"></p>
+            <section role="region">
+                <div class="row recipes">
+                    <div class="col-12">
+                        <h2 class="display-area-header"></h2>
+                        <ul class="recipes-list"></ul>
+                        <p class="navigate" id="load-more"></p>
+                    </div>
                 </div>
-            </div>
-            <div id="dialog"></div>
-            <div class="row errors hidden">
-                <div class="col-12">
-                    <p id="error_message"></p>
+                <div id="dialog"></div>
+                <div class="row errors hidden">
+                    <div class="col-12">
+                        <p id="error_message"></p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-    </main>
-    <script src="index.js"></script>
+        </main>
+</div>
+<script src="index.js"></script>
 </body>
 
 </html>
