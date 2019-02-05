@@ -161,11 +161,23 @@ function displayDetails(details) {
     let recipeIngredientsId = `#recipe_ingredients_${details.id}`;
     details.extendedIngredients.forEach(element => {
         $(recipeIngredientsId).append(`
-            <li>${element.name}, (${element.amount} ${element.unit}) <a href="" id="${element.id}" class="ingredient"><i class="material-icons tiny">loop</i></a></li>
+            <li>${element.name}, (${element.amount} ${element.unit}) <a href="" id="${element.id}" class="ingredient"><span class="ui-icon ui-icon-arrowrefresh-1-s"></span></a></li>
         `)
     });
     let recipeInstructionsId = `#recipe_instructions_${details.id}`;
-    $(recipeInstructionsId).append(`${details.instructions}`);
+        if(details.instructions != null)
+            $(recipeInstructionsId).append(`${details.instructions}`);
+    else
+        $(recipeInstructionsId).append(`<p>No Instructions provided...</p>`);
+
+    // let recipeIngredientsId = `#recipe_ingredients_${details.id}`;
+    // details.extendedIngredients.forEach(element => {
+    //     $(recipeIngredientsId).append(`
+    //         <li>${element.name}, (${element.amount} ${element.unit}) <a href="" id="${element.id}" class="ingredient"><i class="material-icons tiny">loop</i></a></li>
+    //     `)
+    // });
+    // let recipeInstructionsId = `#recipe_instructions_${details.id}`;
+    // $(recipeInstructionsId).append(`${details.instructions}`);
 
 }
 
@@ -193,12 +205,15 @@ function displayHelpfulInfo(nuggets){
 
 function displayIngredientSubstitute(ingredient) {
 
-    if (ingredient) {
+    if (ingredient.status != 'failure') {
         const ingredientsList = ingredient.substitutes.map((element) => {
             return `<li>${element}</li>`
         })
-        console.log(ingredientsList.join('')); 
         $('#dialog').append(ingredientsList.join(''));
+    }
+    else{
+        $('#dialog').append(`No substitute found for this ingredient :( `);
+        setTimeout(function(){$('#dialog').dialog('close')},2000);
     }
 }
 
