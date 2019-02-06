@@ -167,13 +167,16 @@ function displayDetails(details) {
 function displayHelpfulInfo(nuggets) {
     const recipeInfoId = `#recipe_info_${nuggets.id}`;
     const recipeNuggetsId = `#recipe_nuggets_${nuggets.id}`;
-    const recipeSource = nuggets.sourceName;
+    let recipeSource = nuggets.sourceName;
+    if(recipeSource === null)
+        recipeSource = '(No source provided)'
     const recipeVegan = nuggets.vegan;
-    const recipeVegetarian = nuggets.recipeVegetarian;
+    let recipeVegetarian = nuggets.recipeVegetarian;
     const recipeDairyFree = nuggets.dairyFree;
     const recipeGlutenFree = nuggets.glutenFree;
     const recipeLink = nuggets.sourceUrl;
     if (recipeVegan) {
+        recipeVegetarian = true;
         $(recipeNuggetsId).append(`<span>Vegan <i class="material-icons">check</i></span>`)
     } else {
         $(recipeNuggetsId).append(`<span>Vegan <i class="material-icons tiny">not_interested</i></span>`)
