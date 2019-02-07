@@ -28,7 +28,7 @@ function recipeFinderLandingPage() {
         $('.button-start').on('click', function (event) {
             event.preventDefault();
             handleForm();
-            $('.start').empty();
+            //$('.start').empty();
         })
     }, 300);
 
